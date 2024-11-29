@@ -21,8 +21,12 @@
         "backgroundColor": "#ffffff"
       }
     },
+    "scheme": "to-do-app",
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "plugins": [
+      "expo-router"
+    ]
   }
 }
