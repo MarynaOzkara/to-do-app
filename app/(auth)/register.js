@@ -8,7 +8,7 @@ import {
   TextInput,
   View,
 } from "react-native";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import AntDesign from "@expo/vector-icons/AntDesign";
 
@@ -20,20 +20,22 @@ const register = () => {
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
   const router = useRouter();
-  const handleRegister = () => {
+
+  const handleRegister = async () => {
     const user = { name: name, email: email, password: password };
     axios
-      .post("http://localhost:3000/register", user)
-      .then((response) => {
-        console.log(response);
-        Alert.alert("Registration successfull");
+      .post("http://192.168.0.103:3000/auth/register", user)
+      .then((res) => {
+        console.log(res.data);
+
+        Alert.alert("Registration is successfull!");
         setName("");
         setEmail("");
         setPassword("");
       })
       .catch((err) => {
-        Alert.alert("Registration failed");
-        console.log("Error", err);
+        console.log(err);
+        Alert.alert("Registration is failed");
       });
   };
   return (
@@ -143,7 +145,7 @@ const register = () => {
 
           <View style={{ marginTop: 60 }} />
           <Pressable
-            onPress={handleRegister}
+            onPress={() => handleRegister()}
             style={{
               width: 200,
               backgroundColor: "#6699cc",
