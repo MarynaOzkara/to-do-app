@@ -21,10 +21,12 @@ const userSchema = new Schema(
       type: String,
       default: "",
     },
-    todos: {
-      type: Schema.Types.ObjectId,
-      ref: "Todo",
-    },
+    todos: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Todo",
+      },
+    ],
   },
   { versionKey: false, timestamps: true }
 );

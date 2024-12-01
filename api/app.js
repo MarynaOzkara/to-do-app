@@ -4,6 +4,7 @@ const cors = require("cors");
 require("dotenv").config();
 
 const authRouter = require("./routes/auth");
+const todosRouter = require("./routes/todos");
 
 const app = express();
 app.use(cors());
@@ -11,6 +12,7 @@ app.use(express.json());
 app.use(bodyParser.json());
 
 app.use("/auth", authRouter);
+app.use("/todos", todosRouter);
 
 app.get("/", (req, res) => {
   res.json("Hello from backend TODO-APP");

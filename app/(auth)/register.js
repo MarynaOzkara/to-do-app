@@ -14,6 +14,7 @@ import AntDesign from "@expo/vector-icons/AntDesign";
 
 import { useRouter } from "expo-router";
 import axios from "axios";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const register = () => {
   const [email, setEmail] = useState("");
@@ -26,12 +27,14 @@ const register = () => {
     axios
       .post("http://192.168.0.103:3000/auth/register", user)
       .then((res) => {
-        console.log(res.data);
-
+        const token = res.data.token;
+        // console.log(token);
+        AsyncStorage.setItem("authToken", token);
         Alert.alert("Registration is successfull!");
         setName("");
         setEmail("");
         setPassword("");
+        router.replace("/(tabs)/home");
       })
       .catch((err) => {
         console.log(err);

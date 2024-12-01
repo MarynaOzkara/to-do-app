@@ -7,15 +7,38 @@ import {
   TextInput,
   View,
 } from "react-native";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import { useRouter } from "expo-router";
+import axios from "axios";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const login = () => {
-  const [emal, setEmail] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const router = useRouter();
+  useEffect(() => {
+    const checkLoginStatus = async () => {
+      try {
+        const token = await AsyncStorage.getItem("authToken");
+        if (token) {
+          router.replace("/(tabs)/home");
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    checkLoginStatus();
+  }, []);
+  const handleLogin = () => {
+    const user = { email: email, password: password };
+    axios.post("http://192.168.0.103:3000/auth/login", user).then((res) => {
+      const token = res.data.token;
+      AsyncStorage.setItem("authToken", token);
+      router.replace("/(tabs)/home");
+    });
+  };
   return (
     <SafeAreaView
       style={{ flex: 1, backgroundColor: "#ffffff", alignItems: "center" }}
@@ -50,7 +73,7 @@ const login = () => {
               color="gray"
             />
             <TextInput
-              value={emal}
+              value={email}
               onChangeText={(text) => setEmail(text)}
               style={{
                 color: "gray",
@@ -106,6 +129,7 @@ const login = () => {
           </View>
           <View style={{ marginTop: 60 }} />
           <Pressable
+            onPress={() => handleLogin()}
             style={{
               width: 200,
               backgroundColor: "#6699cc",
