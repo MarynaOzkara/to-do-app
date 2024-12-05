@@ -6,12 +6,12 @@ const HttpError = require("../../../helpers/HttpError");
 
 const addTodo = async (req, res) => {
   const { userId } = req.params;
-  console.log(userId);
+  // console.log(userId);
   const { title, category } = req.body;
   const newTodo = new Todo({
     title,
     category,
-    dueDate: moment().format("DD-MM-YYYY"),
+    dueDate: moment().format("YYYY-MM-DD"),
   });
   await newTodo.save();
   const user = await User.findById(userId);
