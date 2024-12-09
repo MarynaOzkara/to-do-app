@@ -112,6 +112,7 @@ const index = () => {
   };
   // console.log(complitedTodos);
   // console.log(pendingTodos);
+  // console.log(suggestions);
   return (
     <>
       <View
