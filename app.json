@@ -2,6 +2,7 @@
   "expo": {
     "name": "TODO App",
     "slug": "todo-app",
+    "description": "TODO app helps you to control all things, that have to be done",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/list.png",
