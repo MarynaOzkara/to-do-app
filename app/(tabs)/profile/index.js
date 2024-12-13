@@ -126,10 +126,24 @@ const index = () => {
           backgroundColor: "#89cff0",
           padding: 10,
           borderRadius: 8,
-          marginTop: 10,
+          marginTop: 15,
         }}
       >
         <Text style={{ textAlign: "center" }}>Tasks for next 7 days</Text>
+      </View>
+      <View
+        style={{
+          justifyContent: "center",
+          alignItems: "center",
+          marginTop: 20,
+        }}
+      >
+        <Image
+          style={{ width: 120, height: 120 }}
+          source={{
+            uri: "https://cdn-icons-png.flaticon.com/128/9537/9537221.png",
+          }}
+        />
       </View>
     </View>
   );

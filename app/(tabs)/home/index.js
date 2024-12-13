@@ -22,8 +22,10 @@ import {
 } from "react-native-modals";
 import axios from "axios";
 import moment from "moment";
+import { useRouter } from "expo-router";
 
 const index = () => {
+  const router = useRouter();
   const today = moment().format("YYYY-MM-DD");
   const [todos, setTodos] = useState([]);
   const [modalVisisble, setModalVisible] = useState(false);
@@ -176,6 +178,18 @@ const index = () => {
               {pendingTodos?.length > 0 && <Text>Tasks to Do! {today}</Text>}
               {pendingTodos.map((item, index) => (
                 <Pressable
+                  onPress={() => {
+                    router?.push({
+                      pathname: "/home/info",
+                      params: {
+                        id: item._id,
+                        title: item.title,
+                        category: item.category,
+                        createdAt: item.createdAt,
+                        dueDate: item.dueDate,
+                      },
+                    });
+                  }}
                   style={{
                     backgroundColor: "#e0e0e0",
                     padding: 10,
